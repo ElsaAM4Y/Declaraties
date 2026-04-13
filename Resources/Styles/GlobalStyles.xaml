@@ -53,7 +53,7 @@
         <Setter Property="Padding" Value="12" />
     </Style>
 
-    <Style TargetType="ContentPage">
+    <Style TargetType="ContentPage" x:Key="PageBackgroundColor">
         <Setter Property="BackgroundColor"
                 Value="{AppThemeBinding Light={StaticResource PageBackgroundColor},
                                      Dark={StaticResource PageBackgroundColor}}" />
