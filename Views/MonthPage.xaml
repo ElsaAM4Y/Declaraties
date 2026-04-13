@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Declaraties.Views.MonthPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Background="{DynamicResource PageBackgroundColor}">
+
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="12" Spacing="10">
+
+                <Label Text="Tarief per dag"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       TextColor="{DynamicResource PrimaryTextColor}" />
+
+                <Entry Text="{Binding RatePerDay, Mode=TwoWay}"
+                       Keyboard="Text"
+                       BackgroundColor="{DynamicResource EntryBackgroundColor}"
+                       TextColor="{DynamicResource PrimaryTextColor}" />
+
+                <HorizontalStackLayout Spacing="8" HeightRequest="50">
+
+                    <!-- ⭐ FIXED: No converter needed -->
+                    <Picker ItemsSource="{Binding Months}"
+                            SelectedIndex="{Binding Month}"
+                            WidthRequest="150"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
+                                 Dark={StaticResource CardBackgroundColor}}"
+TextColor="{AppThemeBinding Light={StaticResource TextColor},
+                         Dark={StaticResource TextColor}}" />
+
+                    <Picker ItemsSource="{Binding Years}"
+                            SelectedItem="{Binding Year}"
+                            WidthRequest="70"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
+                                 Dark={StaticResource CardBackgroundColor}}"
+TextColor="{AppThemeBinding Light={StaticResource TextColor},
+                         Dark={StaticResource TextColor}}" />
+
+                    <Button Text="Opslaan"
+                            Command="{Binding SaveCommand}"
+                            HeightRequest="50"
+                            HorizontalOptions="FillAndExpand" />
+
+                </HorizontalStackLayout>
+
+                <CollectionView ItemsSource="{Binding Records}"
+                                ItemsUpdatingScrollMode="KeepScrollOffset"
+                                SelectionMode="None">
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="4"
+                                  ColumnDefinitions="40,80,*"
+                                  ColumnSpacing="8"
+                                  MinimumHeightRequest="52">
+
+                                <Label Text="{Binding Date.Day}"
+                                       VerticalOptions="Center"
+                                       TextColor="{DynamicResource PrimaryTextColor}" />
+
+                                <Entry Grid.Column="1"
+                                       Text="{Binding DayTimesWorking, Mode=TwoWay}"
+                                       Keyboard="Numeric"
+                                       VerticalOptions="Center"
+                                       BackgroundColor="{DynamicResource EntryBackgroundColor}"
+                                       TextColor="{DynamicResource PrimaryTextColor}" />
+
+                                <Entry Grid.Column="2"
+                                       Text="{Binding DayNote, Mode=TwoWay}"
+                                       VerticalOptions="Center"
+                                       BackgroundColor="{DynamicResource EntryBackgroundColor}"
+                                       TextColor="{DynamicResource PrimaryTextColor}" />
+
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Border Grid.Row="1"
+                Padding="12"
+                BackgroundColor="{DynamicResource EntryBackgroundColor}"
+                StrokeThickness="0">
+
+            <Label Text="{Binding TotalsText}"
+                   FontSize="12"
+                   HorizontalOptions="Center"
+                   TextColor="{DynamicResource PrimaryTextColor}" />
+        </Border>
+
+    </Grid>
+</ContentPage>

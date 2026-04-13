@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Declaraties.Views.NotesPage"
+             Title="NotesPage" 
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="12" Spacing="12">
+
+            <!-- Title -->
+            <Entry Text="{Binding Title}"
+              Placeholder="Titel"
+              Keyboard="Text"
+              IsTextPredictionEnabled="True"
+              IsSpellCheckEnabled="True"
+              BackgroundColor="{DynamicResource EntryBackgroundColor}"
+              TextColor="{DynamicResource PrimaryTextColor}" />
+
+            <Editor Text="{Binding Content}"
+               Placeholder="Aantekening..."
+               Keyboard="Text"
+               IsTextPredictionEnabled="True"
+               IsSpellCheckEnabled="True"
+               HeightRequest="140"
+               BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
+                                 Dark={StaticResource CardBackgroundColor}}"
+TextColor="{AppThemeBinding Light={StaticResource TextColor},
+                         Dark={StaticResource TextColor}}" />
+
+
+            <!-- Buttons -->
+            <HorizontalStackLayout Spacing="8">
+                <Button Text="Nieuw"
+                       Command="{Binding NewNoteCommand}" />
+
+                <Button Text="Opslaan"
+                       Command="{Binding SaveCommand}" />
+
+                <Button Text="Verwijderen"
+                       Command="{Binding DeleteCommand}" />
+            </HorizontalStackLayout>
+
+            <!-- Notes List -->
+            <CollectionView ItemsSource="{Binding Notes}"
+                           SelectionMode="Single"
+                           SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource MainBorderStyle}" Margin="0,4">
+                            <Grid Padding="8" RowDefinitions="Auto,Auto">
+                                <Label Text="{Binding Title}"
+                                      FontSize="18"
+                                      TextColor="{DynamicResource PrimaryTextColor}" />
+
+                                <Label Grid.Row="1"
+                                      Text="{Binding Updated, StringFormat='Bijgewerkt: {0:G}'}"
+                                      FontSize="14"
+                                      TextColor="{DynamicResource SecondaryTextColor}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

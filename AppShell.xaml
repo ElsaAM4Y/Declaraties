@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Declaraties.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:Declaraties.Views"
+    FlyoutBehavior="Flyout"
+    Title="Declaraties">
+
+    <!-- Flyout Items -->
+    <ShellContent
+        Title="Maand"
+        Icon="calendar.png"
+        ContentTemplate="{DataTemplate views:MonthPage}"
+        Route="MonthPage" />
+
+    <ShellContent
+        Title="Totalen"
+        Icon="totals.png"
+        ContentTemplate="{DataTemplate views:TotalsPage}"
+        Route="TotalsPage" />
+
+    <ShellContent
+        Title="Aantekeningen"
+        Icon="notes.png"
+        ContentTemplate="{DataTemplate views:NotesPage}"
+        Route="NotesPage" />
+
+    <ShellContent
+        Title="Instellingen"
+        Icon="settings.png"
+        ContentTemplate="{DataTemplate views:SettingsPage}"
+        Route="SettingsPage" />
+
+    <!-- ⭐ FOOTER -->
+    <Shell.FlyoutFooter>
+        <Grid Padding="12" BackgroundColor="{DynamicResource EntryBackgroundColor}">
+            <Label Text="Created by Elsa - AppCat"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   FontAttributes="Italic"
+                   FontSize="12"
+                   TextColor="{DynamicResource PrimaryTextColor}" />
+        </Grid>
+    </Shell.FlyoutFooter>
+
+</Shell>

@@ -1,0 +1,24 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Declaraties"
+             x:Class="Declaraties.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+                <!-- Light Theme -->
+                <ResourceDictionary Source="Resources/Styles/LightTheme.xaml" />
+
+                <!-- Dark Theme -->
+                <ResourceDictionary Source="Resources/Styles/DarkTheme.xaml" />
+
+                <!-- Global Styles -->
+                <ResourceDictionary Source="Resources/Styles/GlobalStyles.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
+
+</Application>
