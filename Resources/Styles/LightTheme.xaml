@@ -24,37 +24,4 @@
     <Color x:Key="NavigationBarBackgroundColor">#009e60</Color>
     <Color x:Key="NavigationBarTextColor">#FFFFFF</Color>
 
-    <!-- BUTTON STYLE -->
-    <Style TargetType="Button">
-        <Setter Property="BackgroundColor" Value="{StaticResource BrandGreen}" />
-        <Setter Property="TextColor" Value="White" />
-        <Setter Property="CornerRadius" Value="8" />
-        <Setter Property="HeightRequest" Value="44" />
-    </Style>
-
-    <!-- ENTRY STYLE -->
-    <Style TargetType="Entry">
-        <Setter Property="BackgroundColor" Value="{StaticResource EntryBackgroundColor}" />
-        <Setter Property="TextColor" Value="{StaticResource TextColor}" />
-        <Setter Property="HeightRequest" Value="44" />
-    </Style>
-
-    <!-- PICKER STYLE -->
-    <Style TargetType="Picker">
-        <Setter Property="BackgroundColor" Value="{StaticResource PickerBackgroundColor}" />
-        <Setter Property="TextColor" Value="{StaticResource PickerTextColor}" />
-        <Setter Property="HeightRequest" Value="44" />
-        <Setter Property="TitleColor" Value="#555555" />
-    </Style>
-
-    <!-- LABELS -->
-    <Style TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource TextColor}" />
-    </Style>
-
-    <!-- CONTENTPAGE -->
-    <Style TargetType="ContentPage">
-        <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}" />
-    </Style>
-
 </ResourceDictionary>
