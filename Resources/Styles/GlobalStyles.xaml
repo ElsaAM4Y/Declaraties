@@ -3,6 +3,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="Declaraties.Resources.Styles.GlobalStyles">
 
+    <!-- ONLY styles here, no <Color> -->
+
     <Style TargetType="Button">
         <Setter Property="BackgroundColor" Value="{StaticResource BrandGreen}" />
         <Setter Property="TextColor" Value="White" />
@@ -57,4 +59,5 @@
                 Value="{AppThemeBinding Light={StaticResource PageBackgroundColor},
                                      Dark={StaticResource PageBackgroundColor}}" />
     </Style>
+
 </ResourceDictionary>

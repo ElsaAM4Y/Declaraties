@@ -3,19 +3,32 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="Declaraties.Resources.Styles.LightTheme">
 
+    <!-- Brand Colors -->
     <Color x:Key="BrandGreen">#009e60</Color>
     <Color x:Key="AccentNeon">#00FF66</Color>
 
+    <!-- Primary Theme Colors -->
     <Color x:Key="PageBackgroundColor">#FFFFFF</Color>
     <Color x:Key="TextColor">#000000</Color>
 
+    <!-- Text Variants -->
+    <Color x:Key="PrimaryTextColor">#000000</Color>
+    <Color x:Key="SecondaryTextColor">#555555</Color>
+
+    <!-- Accent for TotalsPage -->
+    <Color x:Key="AccentColor">#009e60</Color>
+
+    <!-- Inputs -->
     <Color x:Key="EntryBackgroundColor">#F5F5F5</Color>
     <Color x:Key="PickerBackgroundColor">#F5F5F5</Color>
     <Color x:Key="PickerTextColor">#000000</Color>
 
+    <!-- Cards / Borders -->
     <Color x:Key="CardBackgroundColor">#F5F5F5</Color>
     <Color x:Key="BorderColor">#DDDDDD</Color>
 
+    <!-- Navigation Bar -->
     <Color x:Key="NavigationBarBackgroundColor">#009e60</Color>
     <Color x:Key="NavigationBarTextColor">#FFFFFF</Color>
+
 </ResourceDictionary>
