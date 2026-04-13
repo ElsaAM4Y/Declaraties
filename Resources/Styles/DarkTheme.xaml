@@ -3,25 +3,19 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="Declaraties.Resources.Styles.DarkTheme">
 
-    <!-- BRAND COLORS -->
     <Color x:Key="BrandGreen">#009e60</Color>
     <Color x:Key="AccentNeon">#00FF66</Color>
 
-    <!-- DARK MODE BASE COLORS -->
     <Color x:Key="PageBackgroundColor">#121212</Color>
     <Color x:Key="TextColor">#FFFFFF</Color>
 
-    <!-- INPUT FIELDS -->
     <Color x:Key="EntryBackgroundColor">#262626</Color>
     <Color x:Key="PickerBackgroundColor">#262626</Color>
     <Color x:Key="PickerTextColor">#FFFFFF</Color>
 
-    <!-- CARDS -->
     <Color x:Key="CardBackgroundColor">#1E1E1E</Color>
     <Color x:Key="BorderColor">#333333</Color>
 
-    <!-- NAVBAR -->
     <Color x:Key="NavigationBarBackgroundColor">#009e60</Color>
     <Color x:Key="NavigationBarTextColor">#FFFFFF</Color>
-
 </ResourceDictionary>

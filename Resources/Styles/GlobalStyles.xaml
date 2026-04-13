@@ -3,9 +3,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="Declaraties.Resources.Styles.GlobalStyles">
 
-    <!-- ========================= -->
-    <!--        BUTTON STYLE       -->
-    <!-- ========================= -->
     <Style TargetType="Button">
         <Setter Property="BackgroundColor" Value="{StaticResource BrandGreen}" />
         <Setter Property="TextColor" Value="White" />
@@ -14,9 +11,6 @@
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
-    <!-- ========================= -->
-    <!--         LABEL STYLE       -->
-    <!-- ========================= -->
     <Style TargetType="Label">
         <Setter Property="TextColor"
                 Value="{AppThemeBinding Light={StaticResource TextColor},
@@ -24,55 +18,43 @@
         <Setter Property="FontSize" Value="14" />
     </Style>
 
-    <!-- ========================= -->
-    <!--         ENTRY STYLE       -->
-    <!-- ========================= -->
     <Style TargetType="Entry">
         <Setter Property="BackgroundColor"
                 Value="{AppThemeBinding Light={StaticResource EntryBackgroundColor},
                                      Dark={StaticResource EntryBackgroundColor}}" />
-
         <Setter Property="TextColor"
                 Value="{AppThemeBinding Light={StaticResource TextColor},
                                      Dark={StaticResource TextColor}}" />
-
         <Setter Property="HeightRequest" Value="44" />
     </Style>
 
-    <!-- ========================= -->
-    <!--         PICKER STYLE      -->
-    <!-- ========================= -->
     <Style TargetType="Picker">
         <Setter Property="BackgroundColor"
                 Value="{AppThemeBinding Light={StaticResource PickerBackgroundColor},
                                      Dark={StaticResource PickerBackgroundColor}}" />
-
         <Setter Property="TextColor"
                 Value="{AppThemeBinding Light={StaticResource PickerTextColor},
                                      Dark={StaticResource PickerTextColor}}" />
-
         <Setter Property="TitleColor"
                 Value="{AppThemeBinding Light=#555555,
                                      Dark=#AAAAAA}" />
-
         <Setter Property="HeightRequest" Value="44" />
     </Style>
 
-    <!-- ========================= -->
-    <!--       FRAME STYLE         -->
-    <!-- ========================= -->
     <Style TargetType="Frame">
         <Setter Property="BackgroundColor"
                 Value="{AppThemeBinding Light={StaticResource CardBackgroundColor},
                                      Dark={StaticResource CardBackgroundColor}}" />
-
         <Setter Property="BorderColor"
                 Value="{AppThemeBinding Light={StaticResource BorderColor},
                                      Dark={StaticResource BorderColor}}" />
-
         <Setter Property="CornerRadius" Value="12" />
         <Setter Property="Padding" Value="12" />
     </Style>
 
-    <!-- ❗ IMPORTANT: Removed ContentPage style to allow theme switching -->
+    <Style TargetType="ContentPage">
+        <Setter Property="BackgroundColor"
+                Value="{AppThemeBinding Light={StaticResource PageBackgroundColor},
+                                     Dark={StaticResource PageBackgroundColor}}" />
+    </Style>
 </ResourceDictionary>

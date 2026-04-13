@@ -1,17 +1,28 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿namespace Declaraties;
 
-namespace Declaraties
+public partial class App : Application
 {
-    public partial class App : Application
-    {
-        public App()
-        {
-            InitializeComponent();
-        }
+    const string ThemePreferenceKey = "AppTheme";
 
-        protected override Window CreateWindow(IActivationState? activationState)
+    public App()
+    {
+        InitializeComponent();
+
+        var saved = Preferences.Get(ThemePreferenceKey, "Light");
+        ApplyTheme(saved);
+
+        MainPage = new AppShell();
+    }
+
+    public void ApplyTheme(string themeName)
+    {
+        Application.Current.UserAppTheme = themeName switch
         {
-            return new Window(new AppShell());
-        }
+            "Dark" => AppTheme.Dark,
+            _ => AppTheme.Light
+        };
+
+        Preferences.Set(ThemePreferenceKey, themeName);
     }
 }
+

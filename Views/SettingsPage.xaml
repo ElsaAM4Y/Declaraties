@@ -4,30 +4,26 @@
              x:Class="Declaraties.Views.SettingsPage"
              Title="Instellingen"
              BackgroundColor="{AppThemeBinding Light={StaticResource PageBackgroundColor},
-                                     Dark={StaticResource PageBackgroundColor}}">
+                                               Dark={StaticResource PageBackgroundColor}}">
 
-    <VerticalStackLayout Padding="20" Spacing="20" BackgroundColor="Transparent">
+    <VerticalStackLayout Padding="20" Spacing="20">
 
         <Label Text="Thema"
-       FontAttributes="Bold"
-       FontSize="18"
-       TextColor="{AppThemeBinding Light={StaticResource TextColor},
-                                   Dark={StaticResource TextColor}}" />
+               FontAttributes="Bold"
+               FontSize="18"
+               TextColor="{AppThemeBinding Light={StaticResource TextColor},
+                                           Dark={StaticResource TextColor}}" />
 
         <Picker Title="Kies een thema"
-        ItemsSource="{Binding Themes}"
-        SelectedItem="{Binding SelectedTheme}"
-        BackgroundColor="{AppThemeBinding Light={StaticResource PickerBackgroundColor},
-                                         Dark={StaticResource PickerBackgroundColor}}"
-        TextColor="{AppThemeBinding Light={StaticResource PickerTextColor},
-                                 Dark={StaticResource PickerTextColor}}" />
+                ItemsSource="{Binding Themes}"
+                SelectedItem="{Binding SelectedTheme}"
+                BackgroundColor="{AppThemeBinding Light={StaticResource PickerBackgroundColor},
+                                                 Dark={StaticResource PickerBackgroundColor}}"
+                TextColor="{AppThemeBinding Light={StaticResource PickerTextColor},
+                                           Dark={StaticResource PickerTextColor}}" />
 
         <Button Text="Opslaan"
-        Command="{Binding SaveCommand}"
-        BackgroundColor="{StaticResource BrandGreen}"
-        TextColor="White" />
-
+                Command="{Binding SaveCommand}" />
 
     </VerticalStackLayout>
-
 </ContentPage>

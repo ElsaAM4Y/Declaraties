@@ -1,37 +1,39 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
+﻿using System.ComponentModel;
+using System.Windows.Input;
 
 namespace Declaraties.ViewModels;
 
-public partial class SettingsViewModel : ObservableObject
+public class SettingsViewModel : INotifyPropertyChanged
 {
-    [ObservableProperty]
-    private string selectedTheme;
+    public event PropertyChangedEventHandler PropertyChanged;
 
-    public ObservableCollection<string> Themes { get; } =
-        new() { "Light", "Dark", "System" };
+    public IList<string> Themes { get; } = new List<string> { "Light", "Dark" };
+
+    string _selectedTheme;
+    public string SelectedTheme
+    {
+        get => _selectedTheme;
+        set
+        {
+            if (_selectedTheme == value) return;
+            _selectedTheme = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedTheme)));
+        }
+    }
+
+    public ICommand SaveCommand { get; }
 
     public SettingsViewModel()
     {
-        SelectedTheme = Preferences.Get("SelectedTheme", "System");
-        ApplyTheme(SelectedTheme);
+        var saved = Preferences.Get("AppTheme", "Light");
+        SelectedTheme = saved;
+        SaveCommand = new Command(Save);
     }
 
-    [RelayCommand]
-    private async Task Save()
+    void Save()
     {
-        Preferences.Set("SelectedTheme", SelectedTheme);
-        ApplyTheme(SelectedTheme);
-    }
-
-    private void ApplyTheme(string theme)
-    {
-        Application.Current.UserAppTheme = theme switch
-        {
-            "Light" => AppTheme.Light,
-            "Dark" => AppTheme.Dark,
-            _ => AppTheme.Unspecified
-        };
+        if (Application.Current is App app)
+            app.ApplyTheme(SelectedTheme);
     }
 }
+

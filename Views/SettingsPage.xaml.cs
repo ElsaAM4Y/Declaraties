@@ -1,13 +1,12 @@
 using Declaraties.ViewModels;
 
-namespace Declaraties.Views
+namespace Declaraties.Views;
+
+public partial class SettingsPage : ContentPage
 {
-    public partial class SettingsPage : ContentPage
+    public SettingsPage()
     {
-        public SettingsPage(SettingsViewModel vm)
-        {
-            InitializeComponent();
-            BindingContext = vm;
-        }
+        InitializeComponent();
+        BindingContext = new SettingsViewModel();
     }
 }
