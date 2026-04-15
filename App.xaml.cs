@@ -1,4 +1,5 @@
-﻿namespace Declaraties;
+﻿
+namespace Declaraties;
 
 public partial class App : Application
 {
@@ -8,7 +9,6 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        // Load saved theme or default to Light
         var savedTheme = Preferences.Get(ThemePreferenceKey, "Light");
         ApplyTheme(savedTheme);
 
@@ -17,19 +17,27 @@ public partial class App : Application
 
     public void ApplyTheme(string themeName)
     {
-        // Prevent unnecessary theme re-application
-        var current = Preferences.Get(ThemePreferenceKey, "Light");
-        if (current == themeName)
-            return;
+        // Clear current theme dictionaries, keep styles added in XAML
+        Resources.MergedDictionaries.Clear();
 
-        // Apply theme
-        Application.Current.UserAppTheme = themeName switch
+        // Add the correct theme dictionary
+        if (themeName == "Dark")
         {
-            "Dark" => AppTheme.Dark,
-            _ => AppTheme.Light
-        };
+            Resources.MergedDictionaries.Add(new Resources.Styles.DarkTheme());
+        }
+        else
+        {
+            Resources.MergedDictionaries.Add(new Resources.Styles.LightTheme());
+        }
 
-        // Save preference
+        // Re‑add global styles
+        Resources.MergedDictionaries.Add(new Resources.Styles.GlobalStyles());
+
+        // Optional: keep MAUI's AppTheme in sync
+        Application.Current.UserAppTheme = themeName == "Dark"
+            ? AppTheme.Dark
+            : AppTheme.Light;
+
         Preferences.Set(ThemePreferenceKey, themeName);
     }
 }
