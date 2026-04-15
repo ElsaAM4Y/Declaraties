@@ -2,61 +2,52 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <!-- ONLY styles here, no <Color> -->
+    <!-- PAGE -->
+    <Style x:Key="Page" TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="{DynamicResource PageBackgroundColor}" />
+    </Style>
 
-    <Style TargetType="Button">
-        <Setter Property="BackgroundColor" Value="{StaticResource BrandGreen}" />
+    <!-- LABEL -->
+    <Style x:Key="Label" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontAttributes" Value="None" />
+    </Style>
+
+    <!-- ENTRY -->
+    <Style x:Key="Entry" TargetType="Entry">
+        <Setter Property="BackgroundColor" Value="{DynamicResource EntryBackgroundColor}" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HeightRequest" Value="44" />
+    </Style>
+
+    <!-- PICKER -->
+    <Style x:Key="Picker" TargetType="Picker">
+        <Setter Property="BackgroundColor" Value="{DynamicResource PickerBackgroundColor}" />
+        <Setter Property="TextColor" Value="{DynamicResource PickerTextColor}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HeightRequest" Value="44" />
+    </Style>
+
+    <!-- BUTTON -->
+    <Style x:Key="Button" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{DynamicResource BrandGreen}" />
         <Setter Property="TextColor" Value="White" />
         <Setter Property="CornerRadius" Value="8" />
         <Setter Property="HeightRequest" Value="44" />
         <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="16" />
     </Style>
 
-    <Style TargetType="Label">
-        <Setter Property="TextColor"
-                Value="{AppThemeBinding Light={StaticResource TextColor},
-                                     Dark={StaticResource TextColor}}" />
-        <Setter Property="FontSize" Value="14" />
-    </Style>
-
-    <Style TargetType="Entry">
-        <Setter Property="BackgroundColor"
-                Value="{AppThemeBinding Light={StaticResource EntryBackgroundColor},
-                                     Dark={StaticResource EntryBackgroundColor}}" />
-        <Setter Property="TextColor"
-                Value="{AppThemeBinding Light={StaticResource TextColor},
-                                     Dark={StaticResource TextColor}}" />
-        <Setter Property="HeightRequest" Value="44" />
-    </Style>
-
-    <Style TargetType="Picker">
-        <Setter Property="BackgroundColor"
-                Value="{AppThemeBinding Light={StaticResource PickerBackgroundColor},
-                                     Dark={StaticResource PickerBackgroundColor}}" />
-        <Setter Property="TextColor"
-                Value="{AppThemeBinding Light={StaticResource PickerTextColor},
-                                     Dark={StaticResource PickerTextColor}}" />
-        <Setter Property="TitleColor"
-                Value="{AppThemeBinding Light=#555555,
-                                     Dark=#AAAAAA}" />
-        <Setter Property="HeightRequest" Value="44" />
-    </Style>
-
-    <Style TargetType="Frame">
-        <Setter Property="BackgroundColor"
-                Value="{AppThemeBinding Light={StaticResource CardBackgroundColor},
-                                     Dark={StaticResource CardBackgroundColor}}" />
-        <Setter Property="BorderColor"
-                Value="{AppThemeBinding Light={StaticResource BorderColor},
-                                     Dark={StaticResource BorderColor}}" />
+    <!-- FRAME -->
+    <Style x:Key="Frame" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="{DynamicResource CardBackgroundColor}" />
+        <Setter Property="BorderColor" Value="{DynamicResource BorderColor}" />
         <Setter Property="CornerRadius" Value="12" />
         <Setter Property="Padding" Value="12" />
-    </Style>
-
-    <Style TargetType="ContentPage" x:Key="PageBackgroundColor">
-        <Setter Property="BackgroundColor"
-                Value="{AppThemeBinding Light={StaticResource PageBackgroundColor},
-                                     Dark={StaticResource PageBackgroundColor}}" />
     </Style>
 
 </ResourceDictionary>

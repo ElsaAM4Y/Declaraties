@@ -1,66 +1,75 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Declaraties.Views.NotesPage"
-             Title="NotesPage" 
-             BackgroundColor="{DynamicResource PageBackgroundColor}">
+<ContentPage
+    x:Class="Declaraties.Views.NotesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Aantekeningen"
+    Style="{DynamicResource Page}">
 
     <ScrollView>
         <VerticalStackLayout Padding="12" Spacing="12">
 
-            <!-- Title -->
+            <!-- TITLE -->
             <Entry Text="{Binding Title}"
-              Placeholder="Titel"
-              Keyboard="Text"
-              IsTextPredictionEnabled="True"
-              IsSpellCheckEnabled="True"
-              BackgroundColor="{DynamicResource EntryBackgroundColor}"
-              TextColor="{DynamicResource PrimaryTextColor}" />
+                   Placeholder="Titel"
+                   Keyboard="Text"
+                   IsTextPredictionEnabled="True"
+                   IsSpellCheckEnabled="True"
+                   Style="{DynamicResource Entry}" />
 
+            <!-- CONTENT -->
             <Editor Text="{Binding Content}"
-               Placeholder="Aantekening..."
-               Keyboard="Text"
-               IsTextPredictionEnabled="True"
-               IsSpellCheckEnabled="True"
-               HeightRequest="140"
-               BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
-                                 Dark={StaticResource CardBackgroundColor}}"
-TextColor="{AppThemeBinding Light={StaticResource TextColor},
-                         Dark={StaticResource TextColor}}" />
+                    Placeholder="Aantekening..."
+                    Keyboard="Text"
+                    IsTextPredictionEnabled="True"
+                    IsSpellCheckEnabled="True"
+                    HeightRequest="140"
+                    BackgroundColor="{DynamicResource CardBackgroundColor}"
+                    TextColor="{DynamicResource PrimaryTextColor}" />
 
-
-            <!-- Buttons -->
+            <!-- BUTTONS -->
             <HorizontalStackLayout Spacing="8">
+
                 <Button Text="Nieuw"
-                       Command="{Binding NewNoteCommand}" />
+                        Command="{Binding NewNoteCommand}"
+                        Style="{DynamicResource Button}" />
 
                 <Button Text="Opslaan"
-                       Command="{Binding SaveCommand}" />
+                        Command="{Binding SaveCommand}"
+                        Style="{DynamicResource Button}" />
 
                 <Button Text="Verwijderen"
-                       Command="{Binding DeleteCommand}" />
+                        Command="{Binding DeleteCommand}"
+                        Style="{DynamicResource Button}" />
+
             </HorizontalStackLayout>
 
-            <!-- Notes List -->
+            <!-- NOTES LIST -->
             <CollectionView ItemsSource="{Binding Notes}"
-                           SelectionMode="Single"
-                           SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
+
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border Style="{StaticResource MainBorderStyle}" Margin="0,4">
+
+                        <Frame Style="{DynamicResource Frame}" Margin="0,4">
                             <Grid Padding="8" RowDefinitions="Auto,Auto">
+
                                 <Label Text="{Binding Title}"
-                                      FontSize="18"
-                                      TextColor="{DynamicResource PrimaryTextColor}" />
+                                       FontSize="18"
+                                       Style="{DynamicResource Label}" />
 
                                 <Label Grid.Row="1"
-                                      Text="{Binding Updated, StringFormat='Bijgewerkt: {0:G}'}"
-                                      FontSize="14"
-                                      TextColor="{DynamicResource SecondaryTextColor}" />
+                                       Text="{Binding Updated, StringFormat='Bijgewerkt: {0:G}'}"
+                                       FontSize="14"
+                                       TextColor="{DynamicResource SecondaryTextColor}" />
+
                             </Grid>
-                        </Border>
+                        </Frame>
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
+
             </CollectionView>
 
         </VerticalStackLayout>

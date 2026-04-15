@@ -3,50 +3,47 @@
     x:Class="Declaraties.Views.MonthPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Background="{DynamicResource PageBackgroundColor}">
-
+    Style="{DynamicResource Page}">
 
     <Grid RowDefinitions="*,Auto">
 
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Padding="12" Spacing="10">
 
+                <!-- LABEL -->
                 <Label Text="Tarief per dag"
                        FontAttributes="Bold"
-                       FontSize="18"
-                       TextColor="{DynamicResource PrimaryTextColor}" />
+                       Style="{DynamicResource Label}" />
 
+                <!-- ENTRY -->
                 <Entry Text="{Binding RatePerDay, Mode=TwoWay}"
                        Keyboard="Text"
-                       BackgroundColor="{DynamicResource EntryBackgroundColor}"
-                       TextColor="{DynamicResource PrimaryTextColor}" />
+                       Style="{DynamicResource Entry}" />
 
                 <HorizontalStackLayout Spacing="8" HeightRequest="50">
 
-                    <!-- ⭐ FIXED: No converter needed -->
+                    <!-- MONTH PICKER -->
                     <Picker ItemsSource="{Binding Months}"
                             SelectedIndex="{Binding Month}"
                             WidthRequest="150"
-                            BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
-                                 Dark={StaticResource CardBackgroundColor}}"
-TextColor="{AppThemeBinding Light={StaticResource TextColor},
-                         Dark={StaticResource TextColor}}" />
+                            Style="{DynamicResource Picker}" />
 
+                    <!-- YEAR PICKER -->
                     <Picker ItemsSource="{Binding Years}"
                             SelectedItem="{Binding Year}"
                             WidthRequest="70"
-                            BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
-                                 Dark={StaticResource CardBackgroundColor}}"
-TextColor="{AppThemeBinding Light={StaticResource TextColor},
-                         Dark={StaticResource TextColor}}" />
+                            Style="{DynamicResource Picker}" />
 
+                    <!-- SAVE BUTTON -->
                     <Button Text="Opslaan"
                             Command="{Binding SaveCommand}"
                             HeightRequest="50"
-                            HorizontalOptions="FillAndExpand" />
+                            HorizontalOptions="FillAndExpand"
+                            Style="{DynamicResource Button}" />
 
                 </HorizontalStackLayout>
 
+                <!-- COLLECTIONVIEW -->
                 <CollectionView ItemsSource="{Binding Records}"
                                 ItemsUpdatingScrollMode="KeepScrollOffset"
                                 SelectionMode="None">
@@ -58,22 +55,23 @@ TextColor="{AppThemeBinding Light={StaticResource TextColor},
                                   ColumnSpacing="8"
                                   MinimumHeightRequest="52">
 
+                                <!-- DAY NUMBER -->
                                 <Label Text="{Binding Date.Day}"
                                        VerticalOptions="Center"
-                                       TextColor="{DynamicResource PrimaryTextColor}" />
+                                       Style="{DynamicResource Label}" />
 
+                                <!-- HOURS WORKED -->
                                 <Entry Grid.Column="1"
                                        Text="{Binding DayTimesWorking, Mode=TwoWay}"
                                        Keyboard="Numeric"
                                        VerticalOptions="Center"
-                                       BackgroundColor="{DynamicResource EntryBackgroundColor}"
-                                       TextColor="{DynamicResource PrimaryTextColor}" />
+                                       Style="{DynamicResource Entry}" />
 
+                                <!-- NOTE -->
                                 <Entry Grid.Column="2"
                                        Text="{Binding DayNote, Mode=TwoWay}"
                                        VerticalOptions="Center"
-                                       BackgroundColor="{DynamicResource EntryBackgroundColor}"
-                                       TextColor="{DynamicResource PrimaryTextColor}" />
+                                       Style="{DynamicResource Entry}" />
 
                             </Grid>
                         </DataTemplate>
@@ -83,6 +81,7 @@ TextColor="{AppThemeBinding Light={StaticResource TextColor},
             </VerticalStackLayout>
         </ScrollView>
 
+        <!-- TOTALS BAR -->
         <Border Grid.Row="1"
                 Padding="12"
                 BackgroundColor="{DynamicResource EntryBackgroundColor}"
@@ -91,7 +90,7 @@ TextColor="{AppThemeBinding Light={StaticResource TextColor},
             <Label Text="{Binding TotalsText}"
                    FontSize="12"
                    HorizontalOptions="Center"
-                   TextColor="{DynamicResource PrimaryTextColor}" />
+                   Style="{DynamicResource Label}" />
         </Border>
 
     </Grid>

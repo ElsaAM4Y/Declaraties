@@ -1,15 +1,17 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using Declaraties.Services;
 
 namespace Declaraties.ViewModels;
 
 public class SettingsViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
-    public event Action ThemeChanged;
 
-    public IList<string> Themes { get; } = new List<string> { "Light", "Dark" };
+    private void OnPropertyChanged([CallerMemberName] string name = null)
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+    public List<string> Themes { get; } = new() { "Light", "Dark" };
 
     private string _selectedTheme;
     public string SelectedTheme
@@ -17,11 +19,14 @@ public class SettingsViewModel : INotifyPropertyChanged
         get => _selectedTheme;
         set
         {
-            if (_selectedTheme == value)
-                return;
+            if (_selectedTheme != value)
+            {
+                _selectedTheme = value;
+                OnPropertyChanged();
 
-            _selectedTheme = value;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedTheme)));
+                // ⭐ APPLY THE THEME IMMEDIATELY
+                (Application.Current as App)?.ApplyTheme(value);
+            }
         }
     }
 
@@ -29,12 +34,12 @@ public class SettingsViewModel : INotifyPropertyChanged
 
     public SettingsViewModel()
     {
+        // Load saved theme
         SelectedTheme = Preferences.Get("AppTheme", "Light");
-        SaveCommand = new Command(Save);
-    }
 
-    private void Save()
-    {
-        ThemeService.SetTheme(SelectedTheme);
+        SaveCommand = new Command(() =>
+        {
+            (Application.Current as App)?.ApplyTheme(SelectedTheme);
+        });
     }
 }

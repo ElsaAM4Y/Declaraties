@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Declaraties.Views.SettingsPage"
-             Title="Instellingen"
-             BackgroundColor="{AppThemeBinding Light={StaticResource PageBackgroundColor},
-                                               Dark={StaticResource PageBackgroundColor}}">
+<ContentPage
+    x:Class="Declaraties.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Instellingen"
+    Style="{DynamicResource Page}">
 
     <VerticalStackLayout Padding="20" Spacing="20">
 
+        <!-- LABEL -->
         <Label Text="Thema"
                FontAttributes="Bold"
-               FontSize="18"
-               TextColor="{AppThemeBinding Light={StaticResource TextColor},
-                                           Dark={StaticResource TextColor}}" />
+               Style="{DynamicResource Label}" />
 
+        <!-- PICKER -->
         <Picker Title="Kies een thema"
                 ItemsSource="{Binding Themes}"
                 SelectedItem="{Binding SelectedTheme}"
-                BackgroundColor="{AppThemeBinding Light={StaticResource PickerBackgroundColor},
-                                                 Dark={StaticResource PickerBackgroundColor}}"
-                TextColor="{AppThemeBinding Light={StaticResource PickerTextColor},
-                                           Dark={StaticResource PickerTextColor}}" />
+                Style="{DynamicResource Picker}" />
 
+        <!-- BUTTON -->
         <Button Text="Opslaan"
-                Command="{Binding SaveCommand}" />
+                Command="{Binding SaveCommand}"
+                Style="{DynamicResource Button}" />
 
     </VerticalStackLayout>
 </ContentPage>
