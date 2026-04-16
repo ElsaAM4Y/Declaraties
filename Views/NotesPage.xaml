@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="Declaraties.Views.NotesPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -6,73 +5,66 @@
     Title="Aantekeningen"
     Style="{DynamicResource Page}">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="12" Spacing="12">
+    <Grid RowDefinitions="Auto,*" Padding="12" RowSpacing="12">
 
-            <!-- TITLE -->
+        <!-- BOVENSTE DEEL -->
+        <VerticalStackLayout Grid.Row="0" Spacing="12">
+
             <Entry Text="{Binding Title}"
                    Placeholder="Titel"
+                   Style="{DynamicResource Entry}"
                    Keyboard="Text"
                    IsTextPredictionEnabled="True"
                    IsSpellCheckEnabled="True"
-                   Style="{DynamicResource Entry}" />
+                   TextTransform="None" />
 
-            <!-- CONTENT -->
             <Editor Text="{Binding Content}"
                     Placeholder="Aantekening..."
+                    HeightRequest="140"
+                    BackgroundColor="{DynamicResource CardBackgroundColor}"
+                    TextColor="{DynamicResource PrimaryTextColor}"
                     Keyboard="Text"
                     IsTextPredictionEnabled="True"
                     IsSpellCheckEnabled="True"
-                    HeightRequest="140"
-                    BackgroundColor="{DynamicResource CardBackgroundColor}"
-                    TextColor="{DynamicResource PrimaryTextColor}" />
+                    TextTransform="None" />
 
-            <!-- BUTTONS -->
             <HorizontalStackLayout Spacing="8">
-
-                <Button Text="Nieuw"
-                        Command="{Binding NewNoteCommand}"
-                        Style="{DynamicResource Button}" />
-
-                <Button Text="Opslaan"
-                        Command="{Binding SaveCommand}"
-                        Style="{DynamicResource Button}" />
-
-                <Button Text="Verwijderen"
-                        Command="{Binding DeleteCommand}"
-                        Style="{DynamicResource Button}" />
-
+                <Button Text="Nieuw" Command="{Binding NewNoteCommand}" />
+                <Button Text="Opslaan" Command="{Binding SaveCommand}" />
+                <Button Text="Verwijderen" Command="{Binding DeleteCommand}" />
             </HorizontalStackLayout>
 
-            <!-- NOTES LIST -->
-            <CollectionView ItemsSource="{Binding Notes}"
-                            SelectionMode="Single"
-                            SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
-
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-
-                        <Frame Style="{DynamicResource Frame}" Margin="0,4">
-                            <Grid Padding="8" RowDefinitions="Auto,Auto">
-
-                                <Label Text="{Binding Title}"
-                                       FontSize="18"
-                                       Style="{DynamicResource Label}" />
-
-                                <Label Grid.Row="1"
-                                       Text="{Binding Updated, StringFormat='Bijgewerkt: {0:G}'}"
-                                       FontSize="14"
-                                       TextColor="{DynamicResource SecondaryTextColor}" />
-
-                            </Grid>
-                        </Frame>
-
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-
-            </CollectionView>
-
         </VerticalStackLayout>
-    </ScrollView>
+
+        <!-- LIJST MET NOTES -->
+        <CollectionView x:Name="NotesList"
+                        Grid.Row="1"
+                        ItemsSource="{Binding Notes}"
+                        SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <Border Style="{DynamicResource Border}" Margin="0,4">
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnNoteTapped" />
+                        </Border.GestureRecognizers>
+
+                        <Grid RowDefinitions="Auto,Auto">
+                            <Label Text="{Binding Title}" FontSize="18" Style="{DynamicResource Label}" />
+                            <Label Grid.Row="1"
+                                   Text="{Binding Updated, StringFormat='Bijgewerkt: {0:G}'}"
+                                   Style="{DynamicResource LabelSecond}" />
+                        </Grid>
+
+                    </Border>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </Grid>
 
 </ContentPage>

@@ -16,6 +16,8 @@ public partial class NotesViewModel : ObservableObject
     [ObservableProperty] private NoteRecord? selectedNote;
     [ObservableProperty] private ObservableCollection<NoteRecord> notes = new();
 
+    public bool HasNotesLoaded => _isLoaded;
+
     public NotesViewModel(INotesRepository repo)
     {
         _repo = repo;
@@ -29,11 +31,18 @@ public partial class NotesViewModel : ObservableObject
 
         _isLoaded = true;
 
+        // ⭐ Bewaar selectie
+        var previousId = SelectedNote?.Id;
+
         var list = await _repo.GetNotesAsync();
 
         Notes.Clear();
         foreach (var n in list.OrderByDescending(n => n.Updated))
             Notes.Add(n);
+
+        // ⭐ Herstel selectie
+        if (previousId != null)
+            SelectedNote = Notes.FirstOrDefault(n => n.Id == previousId);
     }
 
     [RelayCommand]
@@ -60,6 +69,9 @@ public partial class NotesViewModel : ObservableObject
     [RelayCommand]
     public async Task SaveAsync()
     {
+        // ⭐ Bewaar ID van huidige note
+        var keepId = SelectedNote?.Id;
+
         NoteRecord note = SelectedNote ?? new NoteRecord { Created = DateTime.UtcNow };
 
         note.Title = Title;
@@ -68,12 +80,13 @@ public partial class NotesViewModel : ObservableObject
 
         await _repo.SaveNoteAsync(note);
 
+        // ⭐ Na opslaan opnieuw laden, maar selectie behouden
+        keepId = note.Id;
+
         _isLoaded = false;
         await LoadAsync();
 
-        SelectedNote = null;
-        Title = string.Empty;
-        Content = string.Empty;
+        SelectedNote = Notes.FirstOrDefault(n => n.Id == keepId);
     }
 
     [RelayCommand]
@@ -87,9 +100,9 @@ public partial class NotesViewModel : ObservableObject
         _isLoaded = false;
         await LoadAsync();
 
+        // ⭐ Na verwijderen → UI leegmaken
         SelectedNote = null;
         Title = string.Empty;
         Content = string.Empty;
     }
 }
-

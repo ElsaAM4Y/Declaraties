@@ -1,10 +1,12 @@
 using Declaraties.ViewModels;
-using System.Diagnostics;
+using Declaraties.Models;
 
 namespace Declaraties.Views;
 
 public partial class NotesPage : ContentPage
 {
+    private NotesViewModel Vm => (NotesViewModel)BindingContext;
+
     public NotesPage(NotesViewModel vm)
     {
         InitializeComponent();
@@ -13,11 +15,17 @@ public partial class NotesPage : ContentPage
 
     protected override async void OnAppearing()
     {
-        Debug.WriteLine("NotesPage OnAppearing");
         base.OnAppearing();
 
-        if (BindingContext is NotesViewModel vm)
-            await vm.LoadAsync();
+        if (!Vm.HasNotesLoaded)
+            await Vm.LoadAsync();
+    }
+
+    private void OnNoteTapped(object sender, TappedEventArgs e)
+    {
+        if (sender is Border border && border.BindingContext is NoteRecord note)
+        {
+            Vm.SelectedNote = note;
+        }
     }
 }
-

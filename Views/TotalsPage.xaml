@@ -44,7 +44,7 @@
         <CollectionView.ItemTemplate>
             <DataTemplate>
 
-                <Frame Style="{DynamicResource Frame}" Margin="0,4">
+                <Border Style="{DynamicResource Border}" Margin="0,4">
                     <FlexLayout
                         Direction="Row"
                         Wrap="NoWrap"
@@ -83,7 +83,7 @@
                             Style="{DynamicResource Label}" />
 
                     </FlexLayout>
-                </Frame>
+                </Border>
 
             </DataTemplate>
         </CollectionView.ItemTemplate>

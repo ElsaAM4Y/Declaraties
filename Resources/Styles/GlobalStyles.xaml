@@ -15,6 +15,13 @@
         <Setter Property="FontAttributes" Value="None" />
     </Style>
 
+    <!-- LABELSECOND -->
+    <Style x:Key="LabelSecond" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource SecondaryTextColor}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontAttributes" Value="None" />
+    </Style>
+    
     <!-- ENTRY -->
     <Style x:Key="Entry" TargetType="Entry">
         <Setter Property="BackgroundColor" Value="{DynamicResource EntryBackgroundColor}" />
@@ -43,12 +50,18 @@
         <Setter Property="FontSize" Value="16" />
     </Style>
 
-    <!-- FRAME -->
-    <Style x:Key="Frame" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="{DynamicResource CardBackgroundColor}" />
-        <Setter Property="BorderColor" Value="{DynamicResource BorderColor}" />
-        <Setter Property="CornerRadius" Value="12" />
+    <!-- BORDER -->
+    <Style x:Key="Border" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource CardBackgroundColor}" />
+        <Setter Property="Stroke" Value="{DynamicResource BorderColor}" />
+        <Setter Property="StrokeThickness" Value="1" />
         <Setter Property="Padding" Value="12" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="12" />
+            </Setter.Value>
+        </Setter>
     </Style>
+
 
 </ResourceDictionary>
