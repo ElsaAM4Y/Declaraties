@@ -13,11 +13,10 @@ public partial class TotalsPage : ContentPage
 
     protected override async void OnAppearing()
     {
-        Debug.WriteLine("TotalsPage OnAppearing");
         base.OnAppearing();
+        Debug.WriteLine("TotalsPage OnAppearing");
 
         if (BindingContext is TotalsViewModel vm)
             await vm.LoadTotalsAsync();
     }
 }
-

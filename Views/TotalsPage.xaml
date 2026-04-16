@@ -10,33 +10,34 @@
 
         <!-- HEADER -->
         <CollectionView.Header>
-            <Grid ColumnDefinitions="70,*,80,100"
-                  Padding="12,8"
-                  Margin="0,0,0,4">
+            <FlexLayout
+                Direction="Row"
+                Wrap="NoWrap"
+                AlignItems="Center"
+                JustifyContent="SpaceBetween"
+                Padding="12,8"
+                Margin="0,0,0,4">
 
                 <Label Text="Maand"
                        FontAttributes="Bold"
-                       TextColor="{DynamicResource SecondaryTextColor}" />
+                       Style="{DynamicResource Label}" />
 
-                <Label Grid.Column="1"
-                       Text="Dagen"
+                <Label Text="Dagen"
                        FontAttributes="Bold"
-                       HorizontalOptions="Center"
-                       TextColor="{DynamicResource SecondaryTextColor}" />
+                       HorizontalTextAlignment="Center"
+                       Style="{DynamicResource Label}" />
 
-                <Label Grid.Column="2"
-                       Text="Tarief"
+                <Label Text="Tarief"
                        FontAttributes="Bold"
-                       HorizontalOptions="Center"
-                       TextColor="{DynamicResource SecondaryTextColor}" />
+                       HorizontalTextAlignment="Center"
+                       Style="{DynamicResource Label}" />
 
-                <Label Grid.Column="3"
-                       Text="Totaal"
+                <Label Text="Totaal"
                        FontAttributes="Bold"
-                       HorizontalOptions="End"
-                       TextColor="{DynamicResource SecondaryTextColor}" />
+                       HorizontalTextAlignment="End"
+                       Style="{DynamicResource Label}" />
 
-            </Grid>
+            </FlexLayout>
         </CollectionView.Header>
 
         <!-- ITEMS -->
@@ -44,13 +45,16 @@
             <DataTemplate>
 
                 <Frame Style="{DynamicResource Frame}" Margin="0,4">
-                    <Grid ColumnDefinitions="*,80,80,120"
-                          Padding="4"
-                          MinimumHeightRequest="64">
+                    <FlexLayout
+                        Direction="Row"
+                        Wrap="NoWrap"
+                        AlignItems="Center"
+                        JustifyContent="SpaceBetween"
+                        Padding="8">
 
                         <!-- MONTH + YEAR -->
-                        <VerticalStackLayout VerticalOptions="Center">
-                            <Label Text="{Binding MonthName}"
+                        <VerticalStackLayout FlexLayout.Basis="80">
+                            <Label Text="{Binding MonthShort}"
                                    FontAttributes="Bold"
                                    Style="{DynamicResource Label}" />
 
@@ -60,33 +64,25 @@
                         </VerticalStackLayout>
 
                         <!-- TOTAL DAYS WORKED -->
-                        <Label Grid.Column="1"
-                               Text="{Binding TotalTimesWorking}"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               FontSize="20"
-                               FontAttributes="Bold"
-                               TextColor="{DynamicResource AccentColor}" />
+                        <Label 
+                            Text="{Binding TotalTimesWorking}"
+                            HorizontalTextAlignment="Center"
+                            TextColor="{DynamicResource AccentColor}"
+                            Style="{DynamicResource Label}" />
 
                         <!-- RATE -->
-                        <Label Grid.Column="2"
-                               Text="{Binding Rate, StringFormat='{}{0:C}'}"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               FontSize="18"
-                               FontAttributes="Bold"
-                               Style="{DynamicResource Label}" />
+                        <Label 
+                            Text="{Binding Rate, StringFormat='€ {0:F2}'}"
+                            HorizontalTextAlignment="Center"
+                            Style="{DynamicResource Label}" />
 
                         <!-- TOTAL AMOUNT -->
-                        <Label Grid.Column="3"
-                               Text="{Binding TotalAmount, StringFormat='{}{0:C}'}"
-                               HorizontalOptions="End"
-                               VerticalOptions="Center"
-                               FontSize="18"
-                               FontAttributes="Bold"
-                               Style="{DynamicResource Label}" />
+                        <Label 
+                            Text="{Binding TotalAmount, StringFormat='€ {0:F2}'}"
+                            HorizontalTextAlignment="End"
+                            Style="{DynamicResource Label}" />
 
-                    </Grid>
+                    </FlexLayout>
                 </Frame>
 
             </DataTemplate>

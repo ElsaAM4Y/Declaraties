@@ -1,8 +1,6 @@
 using Declaraties.ViewModels;
-using System.Diagnostics;
 
 namespace Declaraties.Views;
-
 
 public partial class MonthPage : ContentPage
 {
@@ -14,10 +12,12 @@ public partial class MonthPage : ContentPage
 
     protected override async void OnAppearing()
     {
-        Debug.WriteLine("MonthPage OnAppearing");
         base.OnAppearing();
 
         if (BindingContext is MonthViewModel vm)
+        {
+            vm.RestoreState();   // ⭐ juiste plek
             await vm.LoadAsync();
+        }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Globalization;
 
 namespace Declaraties.Models
 {
@@ -12,8 +11,14 @@ namespace Declaraties.Models
         public decimal Rate { get; set; }
         public decimal TotalAmount { get; set; }
 
+        // Full month name (existing)
         public string MonthName =>
-            new DateTime(Year, Month, 1).ToString("MMMM");
-    }
+            new DateTime(Year, Month, 1).ToString("MMMM", new CultureInfo("nl-NL"));
 
+        // ⭐ NEW: NL 3-letter abbreviation
+        public string MonthShort =>
+            new DateTime(Year, Month, 1)
+                .ToString("MMM", new CultureInfo("nl-NL"))
+                .ToLower();
+    }
 }

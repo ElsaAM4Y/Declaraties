@@ -11,18 +11,18 @@ namespace Declaraties.ViewModels
     {
         private readonly IMonthRecordRepository _repo;
         private readonly TotalsViewModel totalsVM;
-        private bool _isLoaded;
 
-        // ✔ Months list restored
+        private bool _isLoaded;
+        private bool _isRestoringState;
+
         public List<string> Months { get; } =
             new() { "Jan", "Feb", "Mrt", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec" };
 
-        // ✔ Years list restored
         public List<int> Years { get; } =
             Enumerable.Range(DateTime.Now.Year - 10, 20).ToList();
 
         [ObservableProperty] private int year;
-        [ObservableProperty] private int month;
+        [ObservableProperty] private int month; // zero-based index
         [ObservableProperty] private decimal ratePerDay;
         [ObservableProperty] private ObservableCollection<MonthRecord> records = new();
         [ObservableProperty] private string totalsText;
@@ -31,13 +31,57 @@ namespace Declaraties.ViewModels
         {
             _repo = repo;
             this.totalsVM = totalsVM;
-
-            Year = DateTime.Now.Year;
-            Month = DateTime.Now.Month - 1; // zero-based index for picker
         }
 
         private string RateKey => $"Rate_{Year}_{Month + 1}";
 
+        // ⭐ Save month/year state
+        public void SaveState()
+        {
+            Preferences.Set("State_Year", Year);
+            Preferences.Set("State_Month", Month);
+        }
+
+        // ⭐ Restore month/year state (NO triggers)
+        public void RestoreState()
+        {
+            _isRestoringState = true;
+
+            Year = Preferences.Get("State_Year", DateTime.Now.Year);
+            Month = Preferences.Get("State_Month", DateTime.Now.Month - 1);
+
+            _isRestoringState = false;
+        }
+
+        private void ResetMonth()
+        {
+            Records.Clear();
+            TotalsText = "Aantal: 0 | Totaal: € 0,00";
+        }
+
+        // ⭐ Month changed
+        partial void OnMonthChanged(int value)
+        {
+            if (_isRestoringState) return;
+
+            SaveState();
+            _isLoaded = false;
+            ResetMonth();
+            LoadAsync();
+        }
+
+        // ⭐ Year changed
+        partial void OnYearChanged(int value)
+        {
+            if (_isRestoringState) return;
+
+            SaveState();
+            _isLoaded = false;
+            ResetMonth();
+            LoadAsync();
+        }
+
+        // ⭐ Load month data
         [RelayCommand]
         public async Task LoadAsync()
         {
@@ -50,6 +94,7 @@ namespace Declaraties.ViewModels
             var raw = Preferences.Get(RateKey, "1,23");
             if (!decimal.TryParse(raw, NumberStyles.Any, new CultureInfo("nl-NL"), out var parsed))
                 parsed = 1.23m;
+
             RatePerDay = parsed;
 
             int realMonth = Month + 1;
@@ -57,6 +102,7 @@ namespace Declaraties.ViewModels
             // Load records
             var list = await _repo.GetForMonthAsync(Year, realMonth);
 
+            // ⭐ If no records → generate empty month
             if (list == null || list.Count == 0)
             {
                 int days = DateTime.DaysInMonth(Year, realMonth);
@@ -90,27 +136,20 @@ namespace Declaraties.ViewModels
         [RelayCommand]
         private async Task SaveAsync()
         {
-            // Save rate
+            SaveState();
+
             Preferences.Set(RateKey, RatePerDay.ToString(new CultureInfo("nl-NL")));
 
-            // Update rate in all records
             foreach (var r in Records)
                 r.RatePerDay = RatePerDay;
 
-            // Save to DB
             await _repo.SaveAllAsync(Records);
 
             UpdateTotals();
 
-            // ⭐ Tell TotalsPage to reload next time
             totalsVM.Reset();
 
-            // Allow reload when month/year changes
             _isLoaded = false;
         }
-
-        // Reset when user changes month/year
-        partial void OnMonthChanged(int value) => _isLoaded = false;
-        partial void OnYearChanged(int value) => _isLoaded = false;
     }
 }

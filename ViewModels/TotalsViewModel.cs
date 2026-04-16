@@ -4,6 +4,7 @@ using Declaraties.Models;
 using Declaraties.Services;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace Declaraties.ViewModels;
 
@@ -54,8 +55,6 @@ public partial class TotalsViewModel : ObservableObject
             .OrderByDescending(x => x.Year)
             .ThenByDescending(x => x.Month)
             .ToList();
-
-        Debug.WriteLine($"Summaries created: {summaries.Count}");
 
         foreach (var s in summaries)
             MonthTotals.Add(s);
